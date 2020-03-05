@@ -73,7 +73,7 @@
 <script>
 import sha1 from "js-sha1";
 import { GetSms, Register, Login } from "@/api/login.js";
-import { reactive, ref, onMounted } from "@vue/composition-api";
+import { reactive, ref, isRef, toRefs, onMounted } from "@vue/composition-api";
 import {
   stripscript,
   validateEmail,
@@ -167,7 +167,6 @@ export default {
       { tex: "登陆", current: true, type: "login" },
       { tex: "注册", current: false, type: "register" }
     ]);
-
     // 基础数据
     const model = ref("login");
     // 登陆按钮禁用状态
@@ -181,9 +180,9 @@ export default {
     const timer = ref(null);
     // 表单绑定数据
     const ruleForm = reactive({
-      username: "",
-      password: "",
-      passwords: "",
+      username: "852298715@qq.com",
+      password: "1305388810",
+      passwords: "1305388810",
       code: ""
     });
 
@@ -212,6 +211,7 @@ export default {
       model.value = data.type;
       // 重置表单
       resetFormData();
+      // 恢复验证码默认状态
       clearCountDown();
     };
     const resetFormData = () => {
@@ -265,8 +265,8 @@ export default {
       });
 
       GetSms(requestData)
+        //对应requese响应拦截中的  return response
         .then(response => {
-          //对应requese响应拦截中的  return response
           let data = response.data;
 
           root.$message({
@@ -281,15 +281,16 @@ export default {
           // 调定时器,倒计时
           conutDown(10);
         })
+        //对用  return Promise.reject(data)
         .catch(error => {
-          //对用  return Promise.reject(data)
-
           console.log(error);
         });
     };
 
     /**
      * 提交表单
+     *
+     * formName 对应的是 loginForm
      */
     const submitForm = formName => {
       refs[formName].validate(valid => {
@@ -304,6 +305,8 @@ export default {
     };
     /**
      * 登陆
+     * 
+     * 通过dispatch调用 store里面的异步请求
      */
     const login = () => {
       let requestData = {
@@ -311,11 +314,28 @@ export default {
         password: sha1(ruleForm.password),
         code: ruleForm.code
       };
-      Login(requestData)
+      root.$store
+        .dispatch("app/loGin", requestData)
         .then(response => {
           console.log("登陆成功");
+          //store 中的 actions 需要将 response 返回出来 不然是undefined
+          console.log(response);
+          // 页面跳转
+          root.$router.push({
+            name: "Console"
+          });
         })
         .catch(error => {});
+      // Login(requestData)
+      //   .then(response => {
+      //     console.log("登陆成功");
+      //     // 页面跳转
+      //     root.$router.push({
+      //       // Console 这是 路由中的 Console
+      //       name: "Console"
+      //     });
+      //   })
+      //   .catch(error => {});
     };
     /**
      * 注册
@@ -335,8 +355,9 @@ export default {
             message: data.message,
             type: "success"
           });
-          // 模拟注册成功
+          // 模拟注册成功   自动切换到登陆
           toggleMenu(menuTab[0]);
+          // 恢复验证码默认状态
           clearCountDown();
         })
         .catch(error => {});
@@ -370,8 +391,8 @@ export default {
       // 清除按钮状态
       updataButtonStatus({
         statu: false,
-        text: '获取验证码'
-      })
+        text: "获取验证码"
+      });
       clearInterval(timer.value);
       // const codeButtons = reactive({
       //   statu: false,
@@ -397,8 +418,7 @@ export default {
       toggleMenu,
       getSms
     };
-  },
-  created() {}
+  }
 };
 </script>
 

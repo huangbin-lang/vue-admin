@@ -15,13 +15,24 @@ module.exports = {
   lintOnSave: false,
   /* 
     webpack配置,see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
+    配置svg : 依赖：npm install svg-sprite-loader -s
   */
   chainWebpack: (config) => {
+    const svgRule = config.module.rule("svg");
+    svgRule.uses.clear();
+    svgRule
+    .use("svg-sprite-loader")
+    .loader("svg-sprite-loader")
+    .options({
+      symbolId: "icon-[name]",
+      include: ["./src/icons"]
+    });
   },
   configureWebpack: (config) => {
     config.resolve = { //配置解析
       extensions: [".js", ".json", ".vue"],
       alias: {
+        'vue': 'vue/dist/vue.js',
         '@': path.resolve(__dirname, './src'),
         'public': path.resolve(__dirname, '.public'),
         'common': path.resolve(__dirname, '.src/common'),
@@ -71,12 +82,12 @@ module.exports = {
          * 本身/devapi 就是 http://www.web-jshtml.cn 而 '^/devapi' 会在 它后面拼接设置的值
          */
         //  /api === http://www.web-jshtml.cn/productapi  遇到/api 就会将/api替换成http://www.web-jshtml.cn/productApi
-        target: 'http://www.web-jshtml.cn/',
+        target: 'http://www.web-jshtml.cn/productapi/token',
         //允许跨域 
         changeOrigin: true,
         pathRewrite: {
           //这里的api意思是：
-          '^/devapi': 'productapi'
+          '^/devapi': ''
         }
       },
     },

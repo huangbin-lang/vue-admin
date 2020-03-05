@@ -1,14 +1,16 @@
 <template>
   <div>
-    用户信息
+    控制台
   </div>
 </template>
+
 <script>
 export default {
-  name: 'UserIndex',
-  setup(props, {}) {}
+  name: 'Console',
+
 }
 </script>
-<style lang="less" scoped>
+
+<style lang="scss" scoped>
 
 </style>
