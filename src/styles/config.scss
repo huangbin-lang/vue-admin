@@ -1,0 +1,17 @@
+// 菜单宽带
+$navMenu: 200px;
+$LayoutHeader:70px;
+//主颜色
+$mainColor: #f56c6c;
+
+@mixin LabelDom($align,$width,$line-height) {
+  label {
+    float: left;
+    width: $width + px;
+    text-align: $align;
+    line-height: $line-height + px;
+  }
+  .warp-content {
+    margin-left: $width + px;
+  }
+}
