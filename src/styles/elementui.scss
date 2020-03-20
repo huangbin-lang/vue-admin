@@ -10,3 +10,32 @@
     background-color: $mainColor !important;
   }
 }
+
+/*table 样式*/
+div.el-table {
+  height: 320px;
+  td, th {
+    text-align: center;
+  }
+  th {
+    font-weight: bold;
+  }
+  td {
+    font-size: 14px;
+  }
+}
+/* 修改 el-dialog 样式 */
+.el-dialog__body {
+  padding: 30px 47px 10px !important;
+}
+.el-dialog__header {
+  margin-left: 40px !important;
+}
+.el-dialog__footer {
+  text-align: center;
+  padding-bottom: 35px !important;
+  .el-button {
+    width: 150px;
+    margin: 0 11px;
+  }
+}

@@ -5,6 +5,7 @@
  */
 import axios from "axios"
 import { Message } from "element-ui";
+import { getToken, getUsername } from "@/utils/app.js"
 
 /**
  * 这是浏览器中network中的请求：Request URL: http://localhost:8066/devapi/getSms/
@@ -24,13 +25,13 @@ const service = axios.create({
 /**
  * 每次请求接口都会拦截一次,都会同意添加一些东西
  * 根据业务需求添加东西
+ * ['Tokey'] : 后台给的 key
  */
 // 添加请求拦截器
 service.interceptors.request.use(function (config) {
   // 在请求发出前做申明
-  config.headers['Tokey'] = '2222'
-  config.headers['userID'] = '1111'
-  config.headers['sui'] = '33333'
+  config.headers['Tokey'] = getToken()
+  config.headers['UserName'] = getUsername()
   return config
 }), function (error) {
   // 对请求出错做什么

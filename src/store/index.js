@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import Cookie from "cookie_js";
 import app from "./app";
 import login from "./login";
+import common from "./common";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -41,7 +42,7 @@ export default new Vuex.Store({
   //   /**
   //    * 同步操作：定义一个方法 调用 mutations 里面的方法 
   //    * 
-  //    * content 指向 getters  mutations  stae
+  //    * content 指向 getters  mutations  state
   //    * content.getters
   //    */
   //   // setMenuStatus(content,data) {
@@ -62,6 +63,7 @@ export default new Vuex.Store({
    */
   modules: {
     app,
-    login
+    login,
+    common
   }
 });

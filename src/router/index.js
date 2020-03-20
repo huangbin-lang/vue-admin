@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-const Layout = () => import("../views/Layout/index.vue");
+const Layout = () => import("@/views/Layout/index.vue");
+const Login = () => import("@/views/Login/index.vue");
 
 Vue.use(VueRouter);
 
@@ -20,7 +21,7 @@ const routes = [
     meta: {
       name: "登陆"
     },
-    component: () => import("../views/Login/index.vue")
+    component: Login
   },
   {
     path: "/console",
@@ -38,7 +39,7 @@ const routes = [
         meta: {
           name: "首页"
         },
-        component: () => import("../views/Console/index.vue")
+        component: () => import("@/views/Console/index.vue")
       }
     ]
   },
@@ -57,7 +58,7 @@ const routes = [
         meta: {
           name: "信息列表"
         },
-        component: () => import("../views/Info/index.vue")
+        component: () => import("@/views/Info/index.vue")
       },
       {
         path: "/infoCategory",
@@ -65,7 +66,7 @@ const routes = [
         meta: {
           name: "信息分类"
         },
-        component: () => import("../views/Info/category.vue")
+        component: () => import("@/views/Info/category.vue")
       }
     ]
   },
@@ -87,7 +88,7 @@ const routes = [
         meta: {
           name: "用户列表"
         },
-        component: () => import("../views/User/index.vue")
+        component: () => import("@/views/User/index.vue")
       }
     ]
   }

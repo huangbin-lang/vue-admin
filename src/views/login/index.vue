@@ -317,25 +317,12 @@ export default {
       root.$store
         .dispatch("app/loGin", requestData)
         .then(response => {
-          console.log("登陆成功");
-          //store 中的 actions 需要将 response 返回出来 不然是undefined
-          console.log(response);
           // 页面跳转
           root.$router.push({
             name: "Console"
           });
         })
         .catch(error => {});
-      // Login(requestData)
-      //   .then(response => {
-      //     console.log("登陆成功");
-      //     // 页面跳转
-      //     root.$router.push({
-      //       // Console 这是 路由中的 Console
-      //       name: "Console"
-      //     });
-      //   })
-      //   .catch(error => {});
     };
     /**
      * 注册

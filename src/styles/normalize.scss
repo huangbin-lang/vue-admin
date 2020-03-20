@@ -28,9 +28,12 @@ html {
 
 body {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
 }
 
+li {
+  list-style: none;
+}
 
 /**
  * Render the `main` element consistently in IE.

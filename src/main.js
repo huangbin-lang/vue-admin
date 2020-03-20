@@ -7,8 +7,9 @@ import ElementUI from 'element-ui';
 import VuecompositionApi from "@vue/composition-api";
 import 'element-ui/lib/theme-chalk/index.css';
 import "./icons";
+import confirm from "@/utils/global.js"
 
-
+Vue.use(confirm)
 Vue.use(VuecompositionApi)
 Vue.use(ElementUI)
 Vue.config.productionTip = false;

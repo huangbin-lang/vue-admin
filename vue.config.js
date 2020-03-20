@@ -36,7 +36,7 @@ module.exports = {
         '@': path.resolve(__dirname, './src'),
         'public': path.resolve(__dirname, '.public'),
         'common': path.resolve(__dirname, '.src/common'),
-        'views': path.resolve(__dirname, '.src/views'),
+        'views': path.resolve(__dirname, '.@/views'),
         'api': path.resolve(__dirname, '.src/api'),
         'data': path.resolve(__dirname, '.src/data'),
         'components': path.resolve(__dirname, '.src/components')
