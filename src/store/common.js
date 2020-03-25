@@ -1,5 +1,10 @@
 import { GetCategory, GetCategoryAll } from "@/api/news.js";
-
+const state = {
+  qiniuUrl: "http://q7owrc25z.bkt.clouddn.com/"
+}
+const getters = {
+  qiniuUrl: state => state.qiniuUrl
+}
 /**
  * vuex
  */
@@ -28,5 +33,7 @@ const actions = {
 
 export default {
   namespaced: true,
+  state,
+  getters,
   actions
 };

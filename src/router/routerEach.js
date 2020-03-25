@@ -13,7 +13,6 @@ const whiterouter = ['/login'];
 
 router.beforeEach((to, from, next) => {
   if (getToken()) {
-    console.log(to)
     // 进入到了index 之后在 地址栏中输入 .login 就清除 token 和 username
     if (to.path === '/login') {
       removeUserName()
@@ -25,9 +24,7 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
-    console.log('存在')
   } else {
-    console.log('不存在')
     if (whiterouter.indexOf(to.path) !== -1) { //存在
       next()
     } else {
