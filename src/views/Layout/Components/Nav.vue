@@ -21,11 +21,13 @@
             <span slot="title">{{ item.meta.name }}</span>
           </template>
           <!-- 子级菜单 li  router 结合 子组件:index="subItem.path" 尽心路由跳转-->
-          <el-menu-item
-            v-for="subItem in item.children"
-            :key="subItem.id"
-            :index="subItem.path"
-          >{{ subItem.meta.name }}</el-menu-item>
+          <template v-for="subItem in item.children">
+            <el-menu-item
+              :key="subItem.id"
+              v-if="!subItem.hidden"
+              :index="subItem.path"
+            >{{ subItem.meta.name }}</el-menu-item>
+          </template>
         </el-submenu>
       </template>
     </el-menu>
@@ -34,7 +36,14 @@
 </template>
 
 <script>
-import { reactive, ref, isRef, toRefs, onMounted, computed } from "@vue/composition-api";
+import {
+  reactive,
+  ref,
+  isRef,
+  toRefs,
+  onMounted,
+  computed
+} from "@vue/composition-api";
 export default {
   name: "Nav",
   setup(props, { root }) {
@@ -47,14 +56,14 @@ export default {
      * 事实监听数据改变
      */
     const isCollapse = computed(() => {
-      return root.$store.state.app.isCollapse
-    })
+      return root.$store.state.app.isCollapse;
+    });
     /**
      * 函数
      */
     return {
       isCollapse,
-      routers,
+      routers
     };
   }
 };

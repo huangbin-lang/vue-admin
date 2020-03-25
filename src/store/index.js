@@ -4,6 +4,8 @@ import Cookie from "cookie_js";
 import app from "./app";
 import login from "./login";
 import common from "./common";
+import infoDetailed from "./infoDetailed";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -64,6 +66,7 @@ export default new Vuex.Store({
   modules: {
     app,
     login,
-    common
+    common,
+    infoDetailed
   }
 });

@@ -37,6 +37,7 @@ const actions = {
         // content.commit('SET_TOKEN', data.token)
         // content.commit('SET_USETNAME', data.username)
         // 解构的
+        //h5本地存储
         commit('SET_TOKEN', data.token)
         commit('SET_USETNAME', data.username)
 

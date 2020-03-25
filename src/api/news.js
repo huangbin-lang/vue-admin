@@ -26,7 +26,7 @@ export function AddInfo(data) {
 export function EditInfo(data) {
   return service.request({
     method: "post",
-    url: "/news/editInfo/ ",
+    url: "/news/editInfo/",
     data
   })
 }

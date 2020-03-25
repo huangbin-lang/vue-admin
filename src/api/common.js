@@ -1,3 +1,4 @@
+import service from "@/utils/request.js";
 /**
  * vue3.0
  */
@@ -22,4 +23,12 @@ export function common() {
     })
   }
   return { getInfoCtegory, getCategoryAll, categoryItem }
+}
+
+export function QiniuToken(data) {
+  return service.request({
+    method: "post",
+    url: "/uploadImgToken/",
+    data
+  })
 }

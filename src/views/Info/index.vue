@@ -75,14 +75,14 @@
     <div class="height-space-30"></div>
     <el-table
       :data="table_data.item"
-      height="320"
+      height="660"
       border
       v-loading="loadingData"
       @selection-change="handleSelectionChange"
       style="width: 100%"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="title" label="标题" width="400"></el-table-column>
+      <el-table-column prop="title" label="标题" width="300"></el-table-column>
       <el-table-column prop="categoryId" label="类型" width="120" :formatter="toCategory"></el-table-column>
       <el-table-column prop="createDate" label="时间" width="160" :formatter="toData"></el-table-column>
       <el-table-column prop="user" label="管理员" width="100"></el-table-column>
@@ -91,6 +91,7 @@
         <template slot-scope="scope">
           <el-button type="danger" size="small" @click="Delete_item(scope.row.id)">删除</el-button>
           <el-button type="success" size="small" @click="editInfo(scope.row.id)">编辑</el-button>
+          <el-button type="success" size="small" @click="detailed(scope.row)">详情编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -284,6 +285,46 @@ export default {
       });
     };
 
+    /**
+     * 详情页
+     * query:优势是不管页面如何刷新,数据也不会丢失
+     * params:优势是数据不会再url显示,但是页面刷新数据会丢失
+     * ：冒号形式,需要在路由上面配置
+     *
+     * 配合路由存储值 在路由中的path: "/infoCategory/:id/:title",
+     * 获取值：root.$route.params.id
+     */
+    
+    const detailed = data => {
+      //存值
+      // root.$store.commit("infoDetailed/SET_ID", data.id);
+      // root.$store.commit("infoDetailed/SET_TITLE", data.title);
+      //存值
+      root.$store.commit("infoDetailed/UPDATA_STATE_VALUE", {
+        id: {
+          value: data.id,
+          sessionKey: "infoId",
+          session: true
+        },
+        titie: {
+          value: data.title,
+          sessionKey: "infoTitle",
+          session: true
+        }
+      });
+      //跳转页面
+      root.$router.push({
+        name: "InfoDetailed",
+        params: {
+          id: data.id,
+          title: data.title
+        }
+      });
+      //配合路由存储值
+      // root.$router.push({
+      //   path: `/InfoDetailed/${data.id}/${data.title}`
+      // })
+    };
     //这里的参数是global_3.0传过来的id
     const confirmDelete = val => {
       console.log(val);
@@ -362,7 +403,7 @@ export default {
         .catch(error => {});
     };
 
-    //时间转换
+    //时间转换   格式化日期
     const toData = (row, column) => {
       return timestampToTime(row.createDate);
     };
@@ -425,7 +466,8 @@ export default {
       toData,
       toCategory,
       handleSelectionChange,
-      editInfo
+      editInfo,
+      detailed
     };
   }
 };
